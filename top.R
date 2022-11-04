@@ -1,0 +1,13 @@
+library(rvest)
+library(dplyr)
+link='https://www.zigwheels.com/upcoming-bikes'
+web=read_html(link)
+brand=web%>%html_nodes(".h-height")%>%html_text()
+View(brand)
+price=web%>%html_nodes("#modelList .fnt-15")%>%html_text()
+View(price)
+launchdate=web%>%html_nodes("#modelList .clr-try")%>%html_text()
+View(launchdate)
+bikes=data.frame(brand,price,launchdate)
+View(bikes)
+write.csv(bikes,'top 50 bikes.csv')
